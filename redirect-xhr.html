@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const heroesUrlTest = 'http://yapi.baidu-int.com/mock/12883/api/heroesTest';
+        //要在chrome或者webkit内核上运行
+        var xhr = new XMLHttpRequest();
+        //访问一个不存在的地址 取保请求不会马上响应
+        xhr.open("GET","http://yapi.baidu-int.com/mock/12883/api/testResponse10s");
+
+        xhr.onload = function () {
+            alert("加载完成");
+
+            navigator.sendBeacon("/wangfengjiao", {});
+        };
+
+        xhr.onabort = function(){
+            alert("执行 onabort");
+
+            navigator.sendBeacon("/wangfengjiao", {});
+        };
+
+        xhr.onerror = function(){
+            alert("执行 onerror");
+
+            navigator.sendBeacon("/wangfengjiao", {});
+        };
+        xhr.send();
+
+        // Case1：手动 abort，会弹出 alert abort，并且发送 beacon
+        // setTimeout(() => {
+        //     xhr.abort();
+        // }, 5000);
+
+        // Case2：模拟跳转页面，不会弹出 alert，不会发送 xhr 中的 beacon，会发送 onbeforeunload beacon。
+        // 从控制台-网络上 testResponse10s 请求一直是 pending
+        // 可以理解为跳转页面后，请求就定在了那一个时刻，xhr 状态不会再发生变化。
+        setTimeout(function(){
+            location.href = "http://www.baidu.com"
+        }, 8000);
+
+        window.onbeforeunload = () => {
+            navigator.sendBeacon("/onbeforeunload", {});
+        }
+    </script>
+</body>
+</html>
