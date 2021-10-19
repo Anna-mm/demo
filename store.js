@@ -1,5 +1,5 @@
 /**
- * arghtorm
+ * algorithm
  * Copyright 2020 Baidu Inc. All rights reserved.
  *
  * @file 实现一个简单的仓储系统，可以不断转入和转出货物，货物最多有两层子目录，数字代表该子目录转入/转出的数量。
@@ -30,5 +30,18 @@
 
 // 爆仓情况：如转入 {productA: {a: 3, c: 1}} 转出 {productA: {a: 4}}，就会发生子类目 a 爆仓，此时要返回报错。
 // 加分项：1. 考虑子类目扩展深度(不止两层) 2. 有单元测试
+class Depository {
+    constructor(options) {
 
-class
+    }
+
+    // 转入货物
+    transferin(cargo) {
+
+    }
+
+    // 转出货物
+    transferout(userId) {
+
+    }
+}
