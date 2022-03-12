@@ -3,6 +3,22 @@
  * @param {*} middleware
  * @returns
  */
+// 洋葱模型
+//  |                                                                                  |
+//  |                              middleware 1                                        |
+//  |                                                                                  |
+//  |          +-----------------------------------------------------------+           |
+//  |          |                                                           |           |
+//  |          |                    middleware 2                           |           |
+//  |          |                                                           |           |
+//  |          |            +---------------------------------+            |           |
+//  |          |            |                                 |            |           |
+//  | action   |  action    |        middleware 3             |    action  |   action  |
+//  | 001      |  002       |                                 |    005     |   006     |
+//  |          |            |   action              action    |            |           |
+//  |          |            |   003                 004       |            |           |
+//  |          |            |                                 |            |           |
+
 export function mycompose(middleware) {
 	return (context, next) => {
         return dispatch(0);
